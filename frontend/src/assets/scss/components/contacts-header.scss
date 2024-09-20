@@ -1,0 +1,25 @@
+.contacts-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 55%;
+    padding: 0 20px 0 20px;
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .icon-button {
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 8px;
+        padding: 10px;
+        
+        &:hover {
+            background-color: $grey-50;
+        }
+    }
+}

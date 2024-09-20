@@ -1,0 +1,29 @@
+.btn {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 16px 8px 16px;
+    justify-content: center;
+    min-height: 40px;
+    gap: 8px;
+    border-radius: 8px;
+    background: none;
+    box-shadow: none;
+    border: 1px solid;
+    border-image-source: linear-gradient(180deg, #3C3C3C 0%, rgba(60, 60, 60, 0) 100%);
+    cursor: pointer;
+    transition: 0.4s;
+
+    &.primary {
+        background: $button-default;
+    }
+
+    &:hover {
+        background: $button-hover;
+    }
+
+    &.rounded {
+        border-radius: 1000px;
+    }
+}

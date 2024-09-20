@@ -1,0 +1,28 @@
+.main-page {
+    header {
+        border-top: 1px solid $grey-50;
+        border-bottom: 1px solid $grey-50;
+        display: flex;
+        margin-top: 6em;
+
+        .left-panel,
+        .right-panel {
+            width: 22.5%;
+            display: flex;
+            align-items: center;
+        }
+
+        .left-panel {
+            justify-content: end;
+        }
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+
+        .contact-list {
+            width: 55%;
+        }
+    }
+}

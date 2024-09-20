@@ -1,0 +1,18 @@
+$grey-100: #141414;
+$grey-90: #191919;
+$grey-80: #1E1E1E;
+$grey-70: #232323;
+$grey-60: #282828;
+$grey-50: #2D2D2D;
+$grey-40: #323232;
+$grey-30: #373737;
+$grey-20: #3C3C3C;
+$grey-10: #414141;
+
+$text-primary: #FFFFFF;
+$text-secondary: #FFFFFF8F;
+$text-disabled: #FFFFFF52;
+
+$button-default: linear-gradient(180deg, rgba(40, 40, 40, 0.7) 0%, #282828 100%), #141414;
+$button-hover: linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), linear-gradient(180deg, rgba(40, 40, 40, 0.7) 0%, #282828 100%), #141414;
+$button-active: linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), linear-gradient(180deg, rgba(40, 40, 40, 0.7) 0%, #282828 100%), #141414;

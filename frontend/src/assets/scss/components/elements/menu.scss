@@ -1,0 +1,36 @@
+.menu {
+    position: absolute;
+    background-color: $grey-80;
+    border-radius: 8px;
+    z-index: 1000;
+    min-width: 200px;
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            padding: 13px;
+            cursor: pointer;
+            font-family: Lexend Deca;
+            font-size: 14px;
+            font-weight: 400;
+            transition: 0.3s;
+
+            &:hover {
+                background-color: $grey-70;
+            }
+        }
+    }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}

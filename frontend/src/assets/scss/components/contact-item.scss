@@ -1,0 +1,83 @@
+.contact-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 15px;
+    transition: 0.3s;
+
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid $grey-60;
+        margin-top: 3px;
+    }
+
+    .info {
+        h3, p {
+            margin: 0;
+            font-family: Lexend Deca;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        p {
+            font-size: 12px;
+            color: $text-secondary;
+        }
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: auto;
+        opacity: 0;
+        transition: 0.15s;
+
+        .menu-container {
+            position: relative;
+
+            li {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                border-radius: 8px;
+
+                svg {
+                    fill: $text-secondary;
+                }
+            }
+        }
+    }
+
+    &:hover {
+        background-color: $grey-90;
+        .actions {
+            opacity: 1;
+        }
+    }
+}
+
+.modal-body {
+    .text-field {
+        margin-top: 25px;
+    }
+
+    .image-edit {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 15px;
+
+        img {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            border: 1px solid $grey-60;
+        }
+    }
+}

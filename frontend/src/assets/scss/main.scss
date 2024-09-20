@@ -1,0 +1,47 @@
+@import "./colors.scss";
+
+// Fonts
+@font-face {
+    font-family: Lexend Deca;
+    src: url("../fonts/LexendDeca-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: Glysa;
+    src: url("../fonts/Glysa.otf");
+}
+
+html {
+    background-color: $grey-100;
+    color: $text-primary;
+    font-family: Glysa;
+    font-weight: 400;
+}
+
+button {
+    color: $text-primary;
+    font-family: Lexend Deca;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    text-align: left;
+}
+
+svg {
+    fill: $text-primary;
+}
+
+// Pages
+@import "./pages/main-page.scss";
+
+// Components
+@import "./components/contacts-header.scss";
+@import "./components/contact-item.scss";
+
+// Elements
+@import "./components/elements/divider.scss";
+@import "./components/elements/menu.scss";
+@import "./components/elements/modal.scss";
+@import "./components/elements/text-field.scss";
+@import "./components/elements/button.scss";
