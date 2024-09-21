@@ -9,7 +9,7 @@
             </div>
             <footer class="modal-footer">
                 <Button @click="closeModal" text="Cancel" />
-                <Button @click="handleSubmit" text="Done" type="primary" />
+                <Button @click="handleSubmit" text="Done" variation="primary" type="submit" />
             </footer>
         </div>
     </div>

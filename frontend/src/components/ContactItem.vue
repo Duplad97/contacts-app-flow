@@ -10,7 +10,7 @@ import IconFavourite from './icons/IconFavourite.vue';
 import IconRemove from './icons/IconRemove.vue';
 import Button from './elements/Button.vue';
 import ContactForm from './ContactForm.vue';
-import { DEF_PROFILE_IMAGE } from '@/constants';
+import { API_BASE_URL, DEF_PROFILE_IMAGE } from '@/constants';
 
 const props = defineProps<{
     contact: IContact;
@@ -46,7 +46,7 @@ onMounted(() => {
 <template>
     <div class="contact-item">
 
-        <img :src="props.contact?.image || DEF_PROFILE_IMAGE" />
+        <img :src="props.contact?.image ? `${API_BASE_URL}/${props.contact.image}`  : DEF_PROFILE_IMAGE" />
         <div class="info">
             <h3>{{ props.contact?.name }}</h3>
             <p>{{ props.contact?.phone }}</p>
