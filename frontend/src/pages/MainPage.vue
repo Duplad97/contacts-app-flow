@@ -1,18 +1,10 @@
 <script setup lang="ts">
-import ContactItem from '@/components/ContactItem.vue';
+import ContactList from '@/components/ContactList.vue';
 import ContactsHeader from '@/components/ContactsHeader.vue';
 import Button from '@/components/elements/Button.vue';
 import Divider from '@/components/elements/Divider.vue';
 import IconArrowBack from '@/components/icons/IconArrowBack.vue';
 import IconLightMode from '@/components/icons/IconLightMode.vue';
-import type { IContact } from '@/interfaces';
-
-const tempContact:IContact = {
-    name: "John Doe",
-    phone: "+36 10 123 4567",
-    email: "john@doe.com",
-    image: "/src/assets/images/contact-image.png",
-} 
 </script>
 
 <template>
@@ -30,11 +22,7 @@ const tempContact:IContact = {
         </header>
 
         <div class="content">
-            <div class="contact-list">
-                <ContactItem :contact="{ ...tempContact }" />
-                <ContactItem :contact="{ ...tempContact }" />
-                <ContactItem :contact="{ ...tempContact }" />
-            </div>
+            <ContactList />
         </div>
     </div>
 </template>

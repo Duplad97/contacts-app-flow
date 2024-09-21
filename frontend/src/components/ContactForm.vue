@@ -7,6 +7,7 @@ import Button from './elements/Button.vue';
 import IconChange from './icons/IconChange.vue';
 import Modal from './elements/Modal.vue';
 import IconAdd from './icons/IconAdd.vue';
+import { DEF_PROFILE_IMAGE } from '@/constants';
 
 const props = defineProps<{
     contact?: IContact;
@@ -34,7 +35,7 @@ const submitForm = () => {
     <Modal :isVisible="props.isVisible" :title="props.contact ? 'Edit contact' : 'Add contact'" @close="closeModal" @submit="submitForm">
         <form @submit.prevent="submitForm">
             <div class="image-edit">
-                <img :src="props.contact?.image || 'src/assets/images/contact-image.png'" />
+                <img :src="props.contact?.image || DEF_PROFILE_IMAGE" />
                 <Button :text="props.contact?.image ? 'Change picture' : 'Add picture'" :icon="props.contact?.image ? IconChange : IconAdd " type="primary" />
                 <Button v-if="props.contact?.image" :icon=IconRemove type="primary" />
             </div>
