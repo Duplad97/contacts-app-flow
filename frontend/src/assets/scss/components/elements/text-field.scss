@@ -32,6 +32,21 @@
         flex-grow: 0;
         font-size: 14px;
         font-family: Lexend Deca;
-        color: $text-primary
+        color: $text-primary;
+        transition: 0.3s;
+
+        &:hover {
+            border: 1px solid $grey-30;
+        }
+
+        &:focus {
+            background: $grey-60;
+            border: 1px solid $grey-10;
+            outline: none;
+        }
+
+        &::placeholder {
+            color: $text-disabled;
+        }
     }
 }

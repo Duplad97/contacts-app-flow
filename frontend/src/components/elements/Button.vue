@@ -14,15 +14,11 @@ const className = (props.rounded ? "btn rounded" : "btn") + (props.variation ? `
 const emit = defineEmits(['click']);
 const buttonEl = ref<HTMLElement | null>(null);
 
-const handleClick = () => {
-    emit('click');
-};
-
 defineExpose({ buttonEl });
 </script>
 
 <template>
-    <button :class="className" ref="buttonEl" @click="handleClick" :type="props.type || 'button'">
+    <button :class="className" ref="buttonEl" @click="$emit('click', $event)" :type="props.type || 'button'">
         <component v-if="props.icon" class="icon" :is="props.icon" />
         <span v-if="props.text">{{ props.text }}</span>
     </button>

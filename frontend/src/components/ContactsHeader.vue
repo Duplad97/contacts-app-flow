@@ -21,11 +21,12 @@ const closeModal = () => {
         <h1>Contacts</h1>
 
         <div class="actions">
-            
-             <Button :icon=IconSettings />
+
+            <Button :icon=IconSettings />
             <img class="icon-button" src="../assets/images/def_profile_pic.png" />
             <Button text="Add new" variation="primary" :icon=IconAdd :rounded=true @click="openModal" />
+
         </div>
     </div>
-    <ContactForm :isVisible="isModalVisible" :closeModal="closeModal" />
+    <ContactForm :isVisible="isModalVisible" @close="closeModal" />
 </template>

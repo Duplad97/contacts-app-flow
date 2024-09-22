@@ -12,6 +12,7 @@ import ContactForm from './ContactForm.vue';
 import { API_BASE_URL, DEF_PROFILE_IMAGE } from '@/constants';
 import { useContactStore, type IContact } from '@/store/useContactStore';
 import { useSnackbarStore } from '@/store/useSnackbarStore';
+import DeleteConfirm from './DeleteConfirm.vue';
 
 const props = defineProps<{
     contact: IContact;
@@ -21,6 +22,8 @@ const contactStore = useContactStore();
 const { addSnackbar } = useSnackbarStore();
 
 const isMenuOpen = ref(false);
+const isFormVisible = ref(false);
+const isDelConfVisible = ref(false);
 const customButton = ref<any>(null);
 const anchorButton = ref<HTMLElement | null>(null);
 
@@ -32,14 +35,20 @@ const closeMenu = () => {
     isMenuOpen.value = false;
 };
 
-const isModalVisible = ref(false);
-
-const openModal = () => {
-    isModalVisible.value = true;
+const openForm = () => {
+    isFormVisible.value = true;
 };
 
-const closeModal = () => {
-    isModalVisible.value = false;
+const closeForm = () => {
+    isFormVisible.value = false;
+};
+
+const openDeleteConfirm = () => {
+    isDelConfVisible.value = true;
+};
+
+const closeDeleteConfirm = () => {
+    isDelConfVisible.value = false;
 };
 
 const handleDelete = async () => {
@@ -75,13 +84,13 @@ onMounted(() => {
                 <Button :icon="IconMore" v-on="$attrs" @click="toggleMenu" ref="customButton" class="icon-button" />
                 <Menu v-if="anchorButton" :isOpen="isMenuOpen" :anchorEl="anchorButton" @close="closeMenu"
                     @mouseleave="closeMenu">
-                    <li @click="openModal">
+                    <li @click="openForm">
                         <IconSettings /> Edit
                     </li>
                     <li>
                         <IconFavourite /> Favourite
                     </li>
-                    <li @click="handleDelete">
+                    <li @click="openDeleteConfirm">
                         <IconRemove /> Remove
                     </li>
                 </Menu>
@@ -90,6 +99,7 @@ onMounted(() => {
         </div>
 
     </div>
-    
-    <ContactForm :isVisible="isModalVisible" :contact="props.contact" :closeModal="closeModal" />
+
+    <ContactForm :isVisible="isFormVisible" :contact="props.contact" @close="closeForm" />
+    <DeleteConfirm :isVisible="isDelConfVisible" :message="`Are you sure you want to delete ${props.contact.name}?`" @close="closeDeleteConfirm" @confirm="handleDelete" />
 </template>
