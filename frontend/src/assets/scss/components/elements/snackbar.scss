@@ -1,0 +1,53 @@
+.snackbar-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .snackbar {
+        padding: 12px;
+        background-color: $color-info;
+        color: white;
+        font-family: Lexend Deca;
+        font-size: 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+
+        &.success {
+            background-color: $color-success;
+        }
+
+        &.error {
+            background-color: $color-error;
+        }
+
+        &.info {
+            background-color: $color-info;
+        }
+
+        &.warning {
+            background-color: $color-warning;
+        }
+    }
+}
+
+/* Slide transition */
+.slide-enter-active,
+.slide-leave-active {
+    transition: all 0.3s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+    transform: translateX(0);
+    opacity: 0;
+}
+
+.slide-enter-to,
+.slide-leave-from {
+    transform: translateX(30%);
+    opacity: 1;
+}

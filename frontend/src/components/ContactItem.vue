@@ -11,12 +11,14 @@ import Button from './elements/Button.vue';
 import ContactForm from './ContactForm.vue';
 import { API_BASE_URL, DEF_PROFILE_IMAGE } from '@/constants';
 import { useContactStore, type IContact } from '@/store/useContactStore';
+import { useSnackbarStore } from '@/store/useSnackbarStore';
 
 const props = defineProps<{
     contact: IContact;
 }>();
 
 const contactStore = useContactStore();
+const { addSnackbar } = useSnackbarStore();
 
 const isMenuOpen = ref(false);
 const customButton = ref<any>(null);
@@ -41,7 +43,12 @@ const closeModal = () => {
 };
 
 const handleDelete = async () => {
-    await contactStore.deleteContact(props.contact.id);
+    try {
+        await contactStore.deleteContact(props.contact.id);
+        addSnackbar("Contact deleted successfully", "success");
+    } catch (error) {
+        addSnackbar("Error when deleting contact", "error");
+    }
 }
 
 onMounted(() => {
@@ -53,13 +60,17 @@ onMounted(() => {
     <div class="contact-item">
 
         <img :src="props.contact?.image ? `${API_BASE_URL}/${props.contact.image}`  : DEF_PROFILE_IMAGE" />
+
         <div class="info">
             <h3>{{ props.contact?.name }}</h3>
             <p>{{ props.contact?.phone }}</p>
         </div>
+
         <div class="actions">
+
             <Button :icon=IconMute />
             <Button :icon=IconHeadphone />
+
             <div class="menu-container">
                 <Button :icon="IconMore" v-on="$attrs" @click="toggleMenu" ref="customButton" class="icon-button" />
                 <Menu v-if="anchorButton" :isOpen="isMenuOpen" :anchorEl="anchorButton" @close="closeMenu"
@@ -75,7 +86,10 @@ onMounted(() => {
                     </li>
                 </Menu>
             </div>
+
         </div>
+
     </div>
+    
     <ContactForm :isVisible="isModalVisible" :contact="props.contact" :closeModal="closeModal" />
 </template>

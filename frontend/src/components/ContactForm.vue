@@ -9,6 +9,7 @@ import IconAdd from './icons/IconAdd.vue';
 import { API_BASE_URL, DEF_PROFILE_IMAGE } from '@/constants';
 import api from '@/config/api';
 import { useContactStore, type IContact } from '@/store/useContactStore';
+import { useSnackbarStore } from '@/store/useSnackbarStore';
 
 const props = defineProps<{
     contact?: IContact;
@@ -17,6 +18,7 @@ const props = defineProps<{
 }>();
 
 const contactStore = useContactStore();
+const { addSnackbar } = useSnackbarStore();
 const loading = ref<boolean>(false);
 
 const fileInput = ref<HTMLInputElement | null>(null);
@@ -43,7 +45,6 @@ const handleChangeFile = (event: Event) => {
         const reader = new FileReader();
         reader.onload = (e) => {
             previewUrl.value = e.target?.result as string;
-            console.log('Image URL:', previewUrl.value);
         };
         reader.readAsDataURL(file);
     }
@@ -66,9 +67,19 @@ const submitForm = async () => {
     loading.value = true;
 
     if (props.contact) {
-        await contactStore.updateContact(contactData.value, imageFile.value);
+        try {
+            await contactStore.updateContact(contactData.value, imageFile.value);
+            addSnackbar("Contact updated successfully", "success");
+        } catch (error) {
+            addSnackbar("Error when updating contact", "error");
+        }
     } else {
-        await contactStore.addContact(contactData.value, imageFile.value);
+        try {
+            await contactStore.addContact(contactData.value, imageFile.value);
+            addSnackbar("Contact created successfully", "success");
+        } catch (error) {
+            addSnackbar("Error when creating contact", "error");
+        }
     }
 
     loading.value = false;
@@ -102,6 +113,11 @@ const submitForm = async () => {
 
             <TextField id="email" label="Email address" :value="contactData.email" type="email" :required="true"
                 @update:value="(value) => handleValueChange('email', value)" />
+
+            <div class="footer-actions">
+                <Button @click="closeModal" text="Cancel" />
+                <Button text="Done" variation="primary" type="submit" />
+            </div>
         </form>
     </Modal>
 </template>

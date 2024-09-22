@@ -14,7 +14,9 @@
     }
 
     .info {
-        h3, p {
+
+        h3,
+        p {
             margin: 0;
             font-family: Lexend Deca;
         }
@@ -56,6 +58,7 @@
 
     &:hover {
         background-color: $grey-90;
+
         .actions {
             opacity: 1;
         }
@@ -85,5 +88,13 @@
             display: flex;
             justify-content: space-between;
         }
+    }
+
+    .footer-actions {
+        margin-top: 35px;
+        padding: 15px;
+        display: flex;
+        justify-content: end;
+        gap: 15px;
     }
 }
