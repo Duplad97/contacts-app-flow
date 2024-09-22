@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { type IContact } from '@/interfaces';
 import IconMute from './icons/IconMute.vue';
 import IconHeadphone from './icons/IconHeadphone.vue';
 import IconMore from './icons/IconMore.vue';
@@ -11,10 +10,13 @@ import IconRemove from './icons/IconRemove.vue';
 import Button from './elements/Button.vue';
 import ContactForm from './ContactForm.vue';
 import { API_BASE_URL, DEF_PROFILE_IMAGE } from '@/constants';
+import { useContactStore, type IContact } from '@/store/useContactStore';
 
 const props = defineProps<{
     contact: IContact;
 }>();
+
+const contactStore = useContactStore();
 
 const isMenuOpen = ref(false);
 const customButton = ref<any>(null);
@@ -37,6 +39,10 @@ const openModal = () => {
 const closeModal = () => {
     isModalVisible.value = false;
 };
+
+const handleDelete = async () => {
+    await contactStore.deleteContact(props.contact.id);
+}
 
 onMounted(() => {
     anchorButton.value = customButton.value?.buttonEl || null;
@@ -64,7 +70,7 @@ onMounted(() => {
                     <li>
                         <IconFavourite /> Favourite
                     </li>
-                    <li>
+                    <li @click="handleDelete">
                         <IconRemove /> Remove
                     </li>
                 </Menu>

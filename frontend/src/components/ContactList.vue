@@ -1,21 +1,17 @@
 <script setup lang="ts">
-import type { IContact } from '@/interfaces';
 import ContactItem from './ContactItem.vue';
 import { onMounted, ref } from 'vue';
-import api from '@/config/api';
 import Loader from './elements/Loader.vue';
+import { useContactStore, type IContact } from '@/store/useContactStore';
 
+const contactStore = useContactStore();
 const contacts = ref<IContact[]>([]);
 const loading = ref<boolean>(true);
 
-onMounted(async() => {
-  loading.value = true;
-    try {
-      const response = await api.get('/');
-      contacts.value = response.data;
-    } catch (error) {
-      console.error(error);
-    }
+onMounted(async () => {
+    loading.value = true;
+    await contactStore.fetchContacts();
+    contacts.value = contactStore.contacts;
     loading.value = false;
 })
 

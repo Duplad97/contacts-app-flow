@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { type IContact } from '@/interfaces';
 import IconRemove from './icons/IconRemove.vue';
 import TextField from './elements/TextField.vue';
 import Button from './elements/Button.vue';
@@ -9,6 +8,7 @@ import Modal from './elements/Modal.vue';
 import IconAdd from './icons/IconAdd.vue';
 import { API_BASE_URL, DEF_PROFILE_IMAGE } from '@/constants';
 import api from '@/config/api';
+import { useContactStore, type IContact } from '@/store/useContactStore';
 
 const props = defineProps<{
     contact?: IContact;
@@ -16,6 +16,7 @@ const props = defineProps<{
     closeModal: Function;
 }>();
 
+const contactStore = useContactStore();
 const loading = ref<boolean>(false);
 
 const fileInput = ref<HTMLInputElement | null>(null);
@@ -63,27 +64,11 @@ const handleValueChange = (field: string, value: any) => {
 
 const submitForm = async () => {
     loading.value = true;
-    const formData = new FormData();
-    formData.append("name", contactData.value.name);
-    formData.append("email", contactData.value.email);
-    formData.append("phone", contactData.value.phone);
-    
-    if (!contactData.value.image && !imageFile.value) {
-        formData.append("image", "");
-    }
-
-    if (imageFile.value) {
-        formData.append("image", imageFile.value);
-    }
 
     if (props.contact) {
-        const response = await api.put(`/${props.contact.id}`, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        })
+        await contactStore.updateContact(contactData.value, imageFile.value);
     } else {
-        const response = await api.post("/", formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        });
+        await contactStore.addContact(contactData.value, imageFile.value);
     }
 
     loading.value = false;

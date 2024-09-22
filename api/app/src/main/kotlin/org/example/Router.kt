@@ -4,26 +4,25 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import java.io.File
 
 fun Route.routes() {
-    val controller = Controller();
+    val controller = Controller()
 
     route("/") {
         // GET all contacts
         get {
-           controller.getContacts(call);
+           controller.getContacts(call)
         }
 
         // POST create a new contact
         post {
-            controller.createContact(call);
+            controller.createContact(call)
         }
 
         // PUT update existing contact
         put("/{id}") {
             val id = call.parameters["id"]?.toIntOrNull() ?: return@put call.respond(HttpStatusCode.BadRequest, "Invalid contact ID")
-            controller.updateContact(call, id);
+            controller.updateContact(call, id)
         }
 
         delete("{id}") {

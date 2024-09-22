@@ -77,9 +77,14 @@ class Controller {
                 contactData!!
             }
 
-            Service.createContact(finalContactData)
+            val id = Service.createContact(finalContactData)
+            val newContact = Service.getContactById(id)
 
-            call.respond(HttpStatusCode.OK, "Contact created successfully")
+            if (newContact != null) {
+                call.respond(HttpStatusCode.OK, newContact)
+            } else {
+                call.respond(HttpStatusCode.InternalServerError, "Failed to create contact")
+            }
         } else {
             call.respond(HttpStatusCode.BadRequest, "Missing contact data")
         }
@@ -136,7 +141,7 @@ class Controller {
 
             val updated = Service.updateContact(contactId, finalContactData)
             if (updated) {
-                call.respond(HttpStatusCode.OK, "Contact updated successfully")
+                call.respond(HttpStatusCode.OK, finalContactData)
             } else {
                 call.respond(HttpStatusCode.NotFound, "Contact not found")
             }
