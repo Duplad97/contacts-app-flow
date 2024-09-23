@@ -24,8 +24,96 @@
         .contact-list {
             width: 55%;
 
-            h3 {
-                text-align: center;
+            .contact-item {
+                h3 {
+                    text-align: center;
+                }
+
+                .mobile-actions {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .divider {
+            display: none;
+        }
+
+        header {
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1.5em;
+            padding: 1em 0 1em 0;
+
+            .left-panel,
+            .right-panel {
+                width: 50%;
+            }
+
+            .left-panel {
+                order: 0;
+                justify-content: start;
+            }
+
+            .right-panel {
+                order: 1;
+                justify-content: end;
+            }
+
+            .contacts-header {
+                width: 90%;
+                align-content: center;
+                order: 2;
+                padding: 0;
+                flex-direction: column;
+
+                .actions {
+                    width: 100%;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+
+    // Tablet responsiveness
+    @media (max-width: 1090px) {
+        .divider {
+            display: none;
+        }
+
+        .content {
+            .contact-list {
+                width: 100%;
+
+                .contact-item {
+                    .actions {
+                        display: none;
+                    }
+
+                    .mobile-actions {
+                        display: block;
+                        margin-left: auto;
+                        position: relative;
+
+                        .menu {
+                            left: auto !important;
+                            right: 0;
+
+                            li {
+                                display: flex;
+                                align-items: center;
+                                gap: 15px;
+                                border-radius: 8px;
+
+                                svg {
+                                    fill: $text-secondary;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

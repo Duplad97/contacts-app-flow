@@ -13,6 +13,9 @@ import { API_BASE_URL, DEF_PROFILE_IMAGE } from '@/constants';
 import { useContactStore, type IContact } from '@/store/useContactStore';
 import { useSnackbarStore } from '@/store/useSnackbarStore';
 import DeleteConfirm from './DeleteConfirm.vue';
+import IconMoreVert from './icons/IconMoreVert.vue'
+import DesktopActions from './contact-actions/DesktopActions.vue';
+import MobileActions from './contact-actions/MobileActions.vue';
 
 const props = defineProps<{
     contact: IContact;
@@ -68,7 +71,7 @@ onMounted(() => {
 <template>
     <div class="contact-item">
 
-        <img :src="props.contact?.image ? `${API_BASE_URL}/${props.contact.image}`  : DEF_PROFILE_IMAGE" />
+        <img :src="props.contact?.image ? `${API_BASE_URL}/${props.contact.image}` : DEF_PROFILE_IMAGE" />
 
         <div class="info">
             <h3>{{ props.contact?.name }}</h3>
@@ -76,30 +79,16 @@ onMounted(() => {
         </div>
 
         <div class="actions">
+            <DesktopActions @openForm="openForm" @openDeleteConfirm="openDeleteConfirm" />
+        </div>
 
-            <Button :icon=IconMute />
-            <Button :icon=IconHeadphone />
-
-            <div class="menu-container">
-                <Button :icon="IconMore" v-on="$attrs" @click="toggleMenu" ref="customButton" class="icon-button" />
-                <Menu v-if="anchorButton" :isOpen="isMenuOpen" :anchorEl="anchorButton" @close="closeMenu"
-                    @mouseleave="closeMenu">
-                    <li @click="openForm">
-                        <IconSettings /> Edit
-                    </li>
-                    <li>
-                        <IconFavourite /> Favourite
-                    </li>
-                    <li @click="openDeleteConfirm">
-                        <IconRemove /> Remove
-                    </li>
-                </Menu>
-            </div>
-
+        <div class="mobile-actions">
+            <MobileActions @openForm="openForm" @openDeleteConfirm="openDeleteConfirm" />
         </div>
 
     </div>
 
     <ContactForm :isVisible="isFormVisible" :contact="props.contact" @close="closeForm" />
-    <DeleteConfirm :isVisible="isDelConfVisible" :message="`Are you sure you want to delete ${props.contact.name}?`" @close="closeDeleteConfirm" @confirm="handleDelete" />
+    <DeleteConfirm :isVisible="isDelConfVisible" :message="`Are you sure you want to delete ${props.contact.name}?`"
+        @close="closeDeleteConfirm" @confirm="handleDelete" />
 </template>
