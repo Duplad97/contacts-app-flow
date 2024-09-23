@@ -9,6 +9,7 @@ import IconAdd from './icons/IconAdd.vue';
 import { API_BASE_URL, DEF_PROFILE_IMAGE } from '@/constants';
 import { useContactStore, type IContact } from '@/store/useContactStore';
 import { useSnackbarStore } from '@/store/useSnackbarStore';
+import Loader from './elements/Loader.vue';
 
 const props = defineProps<{
     contact?: IContact;
@@ -20,10 +21,6 @@ const { addSnackbar } = useSnackbarStore();
 const loading = ref<boolean>(false);
 
 const emit = defineEmits(['close']);
-
-const emitClose = () => {
-    emit('close');
-}
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const imageFile = ref<File | null>(null);
@@ -126,6 +123,7 @@ const submitForm = async (closeModal: () => void) => {
                     type="email" :required="false" @update:value="(value) => handleValueChange('email', value)" />
 
                 <div class="footer-actions">
+                    <Loader v-if="loading" />
                     <Button @click.prevent="handleClose(closeModal)" text="Cancel" />
                     <Button text="Done" variation="primary" type="submit" />
                 </div>

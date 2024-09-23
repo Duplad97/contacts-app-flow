@@ -1,15 +1,5 @@
-<template>
-    <transition name="fade">
-        <div v-if="isOpen" class="menu" ref="menu" :style="menuStyle" @mouseleave="closeMenu" @keydown.esc="closeMenu">
-            <ul>
-                <slot />
-            </ul>
-        </div>
-    </transition>
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, watch, onMounted, onBeforeUnmount } from 'vue';
+import { defineComponent, ref, watch, onBeforeUnmount } from 'vue';
 
 export default defineComponent({
     props: {
@@ -73,3 +63,13 @@ export default defineComponent({
     },
 });
 </script>
+
+<template>
+    <transition name="fade">
+        <div v-if="isOpen" class="menu" ref="menu" :style="menuStyle" @mouseleave="closeMenu" @keydown.esc="closeMenu">
+            <ul>
+                <slot />
+            </ul>
+        </div>
+    </transition>
+</template>
