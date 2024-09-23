@@ -8,6 +8,7 @@
   - [Running the Backend](#running-the-backend)
   - [Running the Frontend](#running-the-frontend)
 - [Project Structure](#project-structure)
+- [API endpoints](#api-endpoints)
 
 ---
 
@@ -32,8 +33,17 @@
 
 ### Running the Backend
 
-1. Navigate to the `api` folder.
-2. Run the following commands:
+1. **Install Java JDK (Version 17 or higher)**: Ensure you have the appropriate JDK installed.
+
+   You can download JDK from:
+   - [Oracle](https://www.oracle.com/java/technologies/downloads/)
+   - [AdoptOpenJDK](https://adoptopenjdk.net/)
+   - [OpenJDK](https://openjdk.java.net/)
+2. Navigate to the `api` folder.
+    ```bash
+    cd ./api
+    ```
+3. Run the following commands:
 
    ```bash
    ./gradlew clean build
@@ -96,3 +106,32 @@ frontend/
 │   ├── pages/                             # Application views
 │   └── App.vue                            # Main Vue component
 ```
+## API Endpoints
+
+#### a. Get All Contacts
+
+- **Endpoint**: `GET /`
+- **Description**: Fetch all contacts.
+
+#### b. Create New Contact
+
+- **Endpoint**: `POST /`
+- **Description**: Create a new contact.
+- **Body** (multipart/form-data):
+    - `contact data`
+    - `image` (optional, file)
+
+#### c. Update Contact
+
+- **Endpoint**: `PUT /{id}`
+- **Description**: Update an existing contact.
+- **Body** (multipart/form-data):
+    - `contact data`
+    - `image` (optional, file)
+
+#### d. Delete Contact
+
+- **Endpoint**: `DELETE /{id}`
+- **Description**: Delete a contact by ID.
+
+---
